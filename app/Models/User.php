@@ -24,7 +24,6 @@ class User extends Authenticatable
         'role',
     ];
 
-    //Relasi : Satu user bisa memiliki banyak pembelian
     public function purchase()
     {
         return $this->hasMany(Purchase::class);

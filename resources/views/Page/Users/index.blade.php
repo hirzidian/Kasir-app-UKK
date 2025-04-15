@@ -40,12 +40,10 @@
                                 <td>
                                     <div class="d-flex justify-content-around">
                                         <a href=
-                                        "{{ route('users.edit', $user->id) }}"
-                                         class="btn btn-warning">Edit</a>
+                                        "{{ route('users.edit', $user->id) }}"class="btn btn-warning">Edit</a>
 
                                         <form action=
-                                        "{{ route('users.destroy', $user->id) }}"
-                                         method="post">
+                                        "{{ route('users.destroy', $user->id) }}"method="post">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"

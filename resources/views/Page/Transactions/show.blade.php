@@ -83,7 +83,7 @@
             if (quantity > 0) {
                 existingInput.value = `${productId};${name};${price};${quantity};${subtotal}`;
             } else {
-                existingInput.remove(); // hapus input jika quantity 0
+                existingInput.remove();
             }
         } else {
             if (quantity > 0) {
@@ -128,8 +128,6 @@
             updateQuantity(productId, maxStock);
         });
     });
-
-    // Initial check on page load
     checkNextButtonStatus();
 </script>
 

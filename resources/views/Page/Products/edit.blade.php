@@ -63,7 +63,7 @@
             function formatPrice(input) {
                 let value = input.value.replace(/[^\d]/g, "");  
                 if (value) {
-                    value = 'Rp ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");  // Format with thousands separator
+                    value = 'Rp ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, "."); 
                 }
                 input.value = value; 
             }
@@ -73,7 +73,6 @@
                 priceInput.value = priceInput.value.replace(/[^\d]/g, "");
             }
 
-            // Membatasi panjang stok menjadi 15 karakter
             document.getElementById('stock').addEventListener('input', function() {
                 let stock = this.value;
                 let warning = document.getElementById('stockWarning');

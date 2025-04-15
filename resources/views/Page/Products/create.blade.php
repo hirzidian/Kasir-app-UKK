@@ -39,7 +39,6 @@
                             <label class="col-md-12">Stock <span class="text-danger">*</span></label>
                             <div class="col-md-12">
                                 <input type="text" name="stock" id="stock" class="form-control form-control-line" placeholder="Stock" maxlength="15" required>
-                                {{-- <small id="stockWarning" class="text-danger" style="display: none;">Stock tidak boleh lebih dari 15 karakter.</small> --}}
                             </div>
                         </div>
                     </div>
@@ -57,31 +56,17 @@
 
         <script>
             function formatPrice(input) {
-                let value = input.value.replace(/[^\d]/g, "");  // Menghapus karakter non-numerik
+                let value = input.value.replace(/[^\d]/g, ""); 
                 if (value) {
-                    value = 'Rp ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");  // Format dengan titik pemisah ribuan
+                    value = 'Rp ' + value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");  
                 }
-                input.value = value;  // Update nilai input
+                input.value = value; 
             }
 
             function cleanPrice() {
                 let priceInput = document.getElementById('price');
-                // Menghapus simbol 'Rp' dan titik sebelum mengirim form
                 priceInput.value = priceInput.value.replace(/[^\d]/g, "");
             }
-
-            // Event listener untuk stok dan harga
-            // document.getElementById('stock').addEventListener('input', function() {
-            //     let stock = this.value;
-            //     let warning = document.getElementById('stockWarning');
-            //     if (stock.length > 15) {
-            //         warning.style.display = 'block';
-            //         document.getElementById('submitBtn').disabled = true; // Disable submit button
-            //     } else {
-            //         warning.style.display = 'none';
-            //         document.getElementById('submitBtn').disabled = false; // Enable submit button
-            //     }
-            // });
         </script>
     </body>
 

@@ -67,18 +67,17 @@
             productCount.push(element.productCount);
         });
 
-        console.log(chartTransaction); // Debug to check if chartTransaction data is correct
-        console.log(chartProduct); // Debug to check if chartProduct data is correct
+        console.log(chartTransaction);
+        console.log(chartProduct); 
 
-        // Bar chart for transactions
         const ctx = document.getElementById('myChart').getContext('2d');
         const salesChart = new Chart(ctx, {
-            type: 'bar', // Jenis grafik
+            type: 'bar',
             data: {
-                labels: date, // Menggunakan data dari controller
+                labels: date,
                 datasets: [{
                     label: 'Jumlah Penjualan',
-                    data: count, // Menggunakan data dari controller
+                    data: count,
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgba(54, 162, 235, 1)',
                     borderWidth: 1
@@ -93,7 +92,6 @@
             }
         });
 
-        // Pie chart for product sales distribution
         const ctx2 = document.getElementById('myChart2').getContext('2d');
         const productChart = new Chart(ctx2, {
             type: 'pie',

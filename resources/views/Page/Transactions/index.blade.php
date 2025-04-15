@@ -5,7 +5,6 @@
 @section('content')
 
 <div class="card-body">
-    {{-- Tombol Export untuk Admin --}}
     <div class="mb-3 row text-start">
         <div class="col-auto">
             <a href="{{ route('excel.print', ['filter' => request('filter')]) }}" class="btn btn-info">
@@ -13,10 +12,6 @@
             </a>
         </div>
     </div>
-
-    
-
-    {{-- Tombol Tambah Penjualan untuk Petugas --}}
     @if (Auth::user()->role == 'petugas')
     <div class="col-auto text-end mb-3">
         <a href=
@@ -59,20 +54,8 @@
                     entri
                 </label>
             </div>
-            
-
-            {{-- Pencarian (opsional, bisa diaktifkan kembali) --}}
-            {{--
-            <div>
-                <label>
-                    Cari:
-                    <input type="search" class="form-control form-control-sm" placeholder="Search...">
-                </label>
-            </div>
-            --}}
         </div>
 
-        {{-- Tabel Penjualan --}}
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -95,11 +78,9 @@
                     <td>
                         <div class="d-flex justify-content-around">
                             <a href=
-                            "{{ route('transactions.sale.print', $transaction->id) }}"
-                             class="btn btn-warning">Lihat</a>
+                            "{{ route('transactions.sale.print', $transaction->id) }}"class="btn btn-warning">Lihat</a>
                             <a href=
-                            "{{ route('pdf.print', $transaction->id) }}"
-                             class="btn btn-info">Unduh Bukti</a>
+                            "{{ route('pdf.print', $transaction->id) }}" class="btn btn-info">Unduh Bukti</a>
                         </div>
                     </td>
                 </tr>

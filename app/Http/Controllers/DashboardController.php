@@ -10,24 +10,19 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Get the count of transactions today
         $data['count'] = Transaction::whereDate('created_at', now())->count();
 
-        // Get the latest transaction date
         $latestTransaction = Transaction::latest()->first();
         $data['date'] = $latestTransaction ? dateDmy($latestTransaction->created_at) : '-';
 
-        // Get all transactions
         $datas = Transaction::all();
         $data['chartTransaction'] = [];
         $data['chartProduct'] = [];
 
-        // Get all products
         $products = Product::all();
 
         $dateLast = null;
 
-        // Prepare transaction chart data
         foreach ($datas as $transaction) {
             $date = dateYmd($transaction->created_at);
             $dateDay = dateDmy($transaction->created_at);
@@ -47,7 +42,6 @@ class DashboardController extends Controller
             $dateLast = dateYmd($transaction->created_at);
         }
 
-        // Prepare product chart data
         foreach ($products as $product) {
             $productCount = TransactionDetail::where('product_id', $product->id)->count();
             if ($productCount != 0) {

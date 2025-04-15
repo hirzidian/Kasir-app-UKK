@@ -109,5 +109,3 @@
 </body>
 
 </html>
-
-buat laporan harian bulanan tahunan 

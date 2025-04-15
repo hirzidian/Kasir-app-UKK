@@ -78,8 +78,8 @@ class TransactionController extends Controller
             $id = $productResult[0];
             $name = $productResult[1];
             $price = $productResult[2];
-            $quantity = $productResult[3]; // ambil product_total
-            $sub_total = $productResult[4]; // ambil sub_total
+            $quantity = $productResult[3];
+            $sub_total = $productResult[4];
 
             if (isset($data['products'][$id])) {
                 $data['products'][$id]['product_total'] += $quantity;
@@ -110,7 +110,7 @@ class TransactionController extends Controller
             foreach ($products as $product) {
                 $productResult = explode(';', $product);
                 $productId = $productResult[0];
-                $quantity = $productResult[3]; // product_total
+                $quantity = $productResult[3];
 
                 $stock = Product::find($productId)->stock;
                 if ($stock < $quantity) {
@@ -175,7 +175,7 @@ class TransactionController extends Controller
 
         // Cek apakah ada transaksi lain selain transaksi ini
         $data['isMany'] = Transaction::where('customer_id', $customerId)
-            ->where('id', '!=', $id) // Pastikan tidak menghitung transaksi saat ini
+            ->where('id', '!=', $id)
             ->exists() ? false : true;
         return view('Page.transactions.member', $data);
     }
@@ -213,7 +213,6 @@ class TransactionController extends Controller
         $data['transaction'] = Transaction::with('customer')->findOrFail($id);
         $data['customer'] = Customers::where('id', $data['transaction']->customer_id)->first();
     
-        // Load the view and pass the data to the PDF generation
         $pdf = Pdf::loadView('Page.pdf.transaction', $data);
         $pdf->setPaper('A4', 'portrait');
     
