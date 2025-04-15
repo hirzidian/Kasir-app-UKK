@@ -21,7 +21,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
+
+    //Relasi : Satu user bisa memiliki banyak pembelian
+    public function purchase()
+    {
+        return $this->hasMany(Purchase::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

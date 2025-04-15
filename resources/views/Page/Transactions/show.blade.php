@@ -4,25 +4,26 @@
 
 @section('content')
 <div class="row" id="product-list">
+    @foreach ($products as $product)
     <div class="col-lg-4 col-md-6">
         <div class="card">
             <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light">
-                <img src="{{ asset('path/to/image.jpg') }}" class="w-50">
+                <img src="{{ asset($product->image) }}" class="w-50">
             </div>
             <div class="card-body">
-                <h5 class="mb-3 card-title" id="name_1">Product 1</h5>
-                <p>Stok 10</p>
-                <h6 class="mb-3">Rp. 100,000</h6>
-                <p id="price_1" hidden="">100000</p>
+                <h5 class="mb-3 card-title" id="name_{{ $product->id }}">{{ $product->name }}</h5>
+                <p>Stok {{ $product->stock }}</p>
+                <h6 class="mb-3">Rp. {{ number_format($product->price, 0, ',', '.') }}</h6>
+                <p id="price_{{ $product->id }}" hidden="">{{ $product->price }}</p>
                 <center>
                     <table>
                         <tbody>
                             <tr>
-                                <td style="padding: 0px 10px; cursor: pointer;" class="minus" data-id="1">
+                                <td style="padding: 0px 10px; cursor: pointer;" class="minus" data-id="{{ $product->id }}">
                                     <b>-</b>
                                 </td>
-                                <td style="padding: 0px 10px;" class="num" id="quantity_1">0</td>
-                                <td style="padding: 0px 10px; cursor: pointer;" class="plus" data-id="1">
+                                <td style="padding: 0px 10px;" class="num" id="quantity_{{ $product->id }}">0</td>
+                                <td style="padding: 0px 10px; cursor: pointer;" class="plus" data-id="{{ $product->id }}">
                                     <b>+</b>
                                 </td>
                             </tr>
@@ -30,45 +31,15 @@
                     </table>
                 </center>
                 <br>
-                <p>Sub Total <b><span id="total_1">Rp. 0</span></b></p>
+                <p>Sub Total <b><span id="total_{{ $product->id }}">Rp. 0</span></b></p>
             </div>
         </div>
     </div>
+    @endforeach
 
-    <div class="col-lg-4 col-md-6">
-        <div class="card">
-            <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light">
-                <img src="{{ asset('path/to/image.jpg') }}" class="w-50">
-            </div>
-            <div class="card-body">
-                <h5 class="mb-3 card-title" id="name_2">Product 2</h5>
-                <p>Stok 20</p>
-                <h6 class="mb-3">Rp. 150,000</h6>
-                <p id="price_2" hidden="">150000</p>
-                <center>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td style="padding: 0px 10px; cursor: pointer;" class="minus" data-id="2">
-                                    <b>-</b>
-                                </td>
-                                <td style="padding: 0px 10px;" class="num" id="quantity_2">0</td>
-                                <td style="padding: 0px 10px; cursor: pointer;" class="plus" data-id="2">
-                                    <b>+</b>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </center>
-                <br>
-                <p>Sub Total <b><span id="total_2">Rp. 0</span></b></p>
-            </div>
-        </div>
-    </div>
-
-    <!-- You can add more product cards here with similar structure -->
-
-    <form action="{{ route('transactions.store') }}" method="POST">
+    <form action=
+    {{-- "{{ route('transaction.store') }}" --}}
+     method="POST">
         @csrf
         <div class="row fixed-bottom d-flex justify-content-end align-content-center"
             style="margin-left: 18%; width: 83%; height: 70px; border-top: 3px solid #EEE4B1; background-color: white;">
@@ -77,8 +48,8 @@
                 <button type="submit" class="btn btn-primary" id="next-button" disabled>Selanjutnya</button>
             </div>
         </div>
-    </form>
 </div>
+</form>
 
 <script>
     function checkNextButtonStatus() {
@@ -161,5 +132,6 @@
     // Initial check on page load
     checkNextButtonStatus();
 </script>
+
 
 @endsection

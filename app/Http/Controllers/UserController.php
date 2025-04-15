@@ -2,63 +2,83 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(request $request)
     {
-        return view('Page.Users.index');
+         //search
+        $query = User::query();
+
+        if($request->has('search') && $request->search != ''){
+            $query->where('name', 'like', '%' . $request->search . '%');
+        }
+
+        $data['users'] = $query->latest()->get();
+        return view('Page.Users.index', $data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('Page.Users.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $r)
+{
+    // Validasi input
+    $request = $r->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users,email',
+        'role' => 'required',
+        'password' => 'required'
+    ]);
+
+    // Cek apakah email sudah terdaftar
+    $existEmail = User::where('email', $r->email)->first();
+    if ($existEmail) {
+        return redirect()->back()->with('error', 'Email sudah terdaftar!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+    // Hash password sebelum disimpan
+    $request['password'] = Hash::make($r->password);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+    // Menyimpan user baru
+    User::create($request);
 
-    /**
-     * Update the specified resource in storage.
-     */
+    return redirect()->route('users.index')->with('success', 'User berhasil ditambahkan!');
+}
+
+    
     public function update(Request $request, string $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,' . $id,
+            'role' => 'required',
+        ]);
+    
+        $user = User::findOrFail($id);
+        $user->update($validated);
+    
+        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui.');
     }
+    
 
-    /**
-     * Remove the specified resource from storage.
-     */
+
+    public function edit(string $id)
+    {
+        $user = User::findOrFail($id);
+        return view('Page.Users.edit', compact('user'));
+    }
+    
     public function destroy(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'User berhasil dihapus.');
+
     }
 }

@@ -36,7 +36,7 @@
             <nav class="navbar top-navbar navbar-expand-md navbar-light">
                 <div class="navbar-header" data-logobg="skin6">
                     <a class="navbar-brand" href=
-                    {{-- "{{ route('dashboard.index') }}" --}}
+                    "{{ route('dashboard.index') }}"
                     >
                         <b class="logo-icon">
                             <img src="{{ asset('assets/images/logo-icon.png') }}" alt="homepage" class="dark-logo" />
@@ -70,7 +70,7 @@
                                     Administrator</a>
 
                                 <a class="dropdown-item" href="
-                                {{-- {{ route('logout') }}" --}}
+                                {{ route('logout') }}"
                                 ><i class="ti-wallet m-r-5 m-l-5"></i> Log Out</a>
                             </ul>
                         </li>
@@ -148,6 +148,6 @@
 
 </body>
 
-@yield('script')
+{{-- @yield('script') --}}
 
 </html>

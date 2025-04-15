@@ -8,14 +8,18 @@
     {{-- Tombol Export untuk Admin --}}
     <div class="mb-3 row text-start">
         <div class="col-auto">
-            <a href="{{ route('excel.print') }}" class="btn btn-info">Export Penjualan (.xlsx)</a>
+            <a href=
+            {{-- "{{ route('excel.print') }}"  --}}
+            class="btn btn-info">Export Penjualan (.xlsx)</a>
         </div>
     </div>
 
     {{-- Tombol Tambah Penjualan untuk Petugas --}}
     @if (Auth::user()->role == 'petugas')
     <div class="col-auto text-end mb-3">
-        <a href="{{ route('transactions.show') }}" class="btn btn-primary">Tambah Penjualan</a>
+        <a href=
+        "{{ route('transactions.show') }}"
+         class="btn btn-primary">Tambah Penjualan</a>
     </div>
     @endif
 
@@ -58,7 +62,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            <tbody>
+            {{-- <tbody>
                 @forelse ($transactions as $transaction)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
@@ -68,8 +72,12 @@
                     <td>{{ $transaction->user->name ?? 'Tidak Diketahui' }}</td>
                     <td>
                         <div class="d-flex justify-content-around">
-                            <a href="{{ route('transactions.sale.print', $transaction->id) }}" class="btn btn-warning">Lihat</a>
-                            <a href="{{ route('pdf.print', $transaction->id) }}" class="btn btn-info">Unduh Bukti</a>
+                            <a href=
+                            "{{ route('transactions.sale.print', $transaction->id) }}"
+                             class="btn btn-warning">Lihat</a>
+                            <a href=
+                            "{{ route('pdf.print', $transaction->id) }}"
+                             class="btn btn-info">Unduh Bukti</a>
                         </div>
                     </td>
                 </tr>
@@ -78,7 +86,7 @@
                     <td colspan="6" class="text-center">Tidak ada data penjualan.</td>
                 </tr>
                 @endforelse
-            </tbody>
+            </tbody> --}}
         </table>
     </div>
 </div>

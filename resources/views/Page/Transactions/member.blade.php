@@ -6,7 +6,9 @@
     <div class="row">
         <div class="card">
             <div class="card-body">
-                <form action="{{ route('transactions.sale.detail.store', $transaction->id) }}" method="POST">
+                <form action=
+                {{-- "{{ route('transactions.sale.detail.store',$transaction->id) }}" --}}
+                 method="POST">
                     @csrf
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
@@ -36,10 +38,10 @@
                                                     <p class="itemtext">{{ $transaction_detail->quantity }}</p>
                                                 </td>
                                                 <td class="tableitem">
-                                                    <p class="itemtext">{{ formattedPrice($transaction_detail->product['price']) }}</p>
+                                                    <p class="itemtext">{{formattedPrice($transaction_detail->product['price'])}}</p>
                                                 </td>
                                                 <td class="tableitem">
-                                                    <p class="itemtext">{{ formattedPrice($transaction_detail->sub_total) }}</p>
+                                                    <p class="itemtext">{{ $transaction_detail->sub_total }}</p>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -69,18 +71,21 @@
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div class="row">
-                                <input type="hidden" name="sale_id" value="{{ $transaction->id }}">
-                                <input type="hidden" name="customer_id" value="{{ $transaction->customer->id }}">
+                                <input type="hidden" name="sale_id" value="247">
+                                <input type="hidden" name="customer_id" value="32">
                                 <div class="form-group">
                                     <label for="name" class="form-label">Nama Member (identitas)</label>
-                                    <input type="text" name="name" id="name" class="form-control" value="{{ $transaction->customer->name }}" required>
+                                    <input type="text" name="name" id="name" class="form-control" value="{{ $transaction->customer->name ? $transaction->customer->name : ''}}" required=""
+                                        value="">
                                 </div>
                                 <div class="form-group">
                                     <label for="poin" class="form-label">Poin</label>
-                                    <input type="text" name="poin" id="poin" value="{{ $transaction->customer->total_point }}" disabled class="form-control">
+                                    <input type="text" name="poin" id="poin" value="{{ $transaction->customer->total_point }}" disabled=""
+                                        class="form-control">
                                 </div>
                                 <div class="form-check ms-4">
-                                    <input class="form-check-input" type="checkbox" value="Ya" id="check2" {{ $isMany ? 'disabled' : '' }} name="check_poin">
+                                    <input class="form-check-input" type="checkbox" value="Ya" id="check2" {{ $isMany ? 'disabled=""': '' }}
+                                        name="check_poin">
                                     <label class="form-check-label" style="font-size: 16px" for="check2">
                                         Gunakan poin
                                     </label>
