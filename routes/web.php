@@ -7,11 +7,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TransactionController;
 
-
-Route::get('/', function () {
-    return view('template');
-});
-
 Route::middleware('guest')->group(function () {
     Route::get('login', [AuthController::class, 'index'])->name('login');
     Route::post('auth', [AuthController::class, 'authProccess'])->name('authProccess');
@@ -57,6 +52,16 @@ Route::middleware('auth')->group(function() {
         Route::get('/sale/member/{id}', [TransactionController::class, 'updateSales'])->name('sale.member');
         Route::post('/sale/detail-print/{id}', [TransactionController::class, 'printdetailStore'])->name('sale.detail.store');
         Route::get('/sale/detail-print/{id}', [TransactionController::class, 'printDetail'])->name('sale.print');
+    });
+
+    // PDF Export
+    Route::prefix('print')->name('pdf.')->group(function () {
+        Route::get('/{id}', [TransactionController::class, 'pdf'])->name('print');
+    });
+
+    // Excel Export
+    Route::prefix('excel')->name('excel.')->group(function () {
+        Route::get('/transactions', [TransactionController::class, 'excel'])->name('print');
     });
     
 });

@@ -13,4 +13,8 @@ class Product extends Model
             'image',
     ];
     
+    public function purchase()
+    {
+        return $this->hasMany(Transaction::class, 'product_id');
+    }
 }

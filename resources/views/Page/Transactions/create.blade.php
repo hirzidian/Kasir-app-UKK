@@ -6,9 +6,7 @@
     <div class="row">
         <div class="card">
             <div class="card-body">
-                <form action=
-                {{-- "{{ route('transactions.sale.store') }}" --}}
-                 method="POST" onsubmit="cleanPrice()">
+                <form action="{{ route('transactions.sale.store') }}" method="POST" onsubmit="cleanPrice()">
                     @csrf
                     <div class="row">
                         <!-- Kolom Kiri: Produk -->
@@ -60,7 +58,7 @@
                             <!-- Input Total Pembayaran -->
                             <div class="form-group mb-3">
                                 <label for="total_pay" class="form-label">Total Bayar</label>
-                                <input type="text" name="total_payment" id="total_pay" class="form-control" oninput="formatPrice(this);checkTotalPay();" required>
+                                <input type="text" name="total_payment" maxlength="15" id="total_pay" class="form-control" oninput="formatPrice(this);checkTotalPay();" required>
                                 <small id="error-message" class="text-danger d-none">Jumlah bayar kurang.</small>
                             </div>
 

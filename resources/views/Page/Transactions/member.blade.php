@@ -7,7 +7,7 @@
         <div class="card">
             <div class="card-body">
                 <form action=
-                {{-- "{{ route('transactions.sale.detail.store',$transaction->id) }}" --}}
+                "{{ route('transactions.sale.detail.store',$transaction->id) }}"
                  method="POST">
                     @csrf
                     <div class="row">

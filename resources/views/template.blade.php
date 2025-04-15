@@ -148,6 +148,6 @@
 
 </body>
 
-{{-- @yield('script') --}}
+@yield('script')
 
 </html>

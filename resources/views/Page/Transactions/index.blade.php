@@ -8,11 +8,13 @@
     {{-- Tombol Export untuk Admin --}}
     <div class="mb-3 row text-start">
         <div class="col-auto">
-            <a href=
-            {{-- "{{ route('excel.print') }}"  --}}
-            class="btn btn-info">Export Penjualan (.xlsx)</a>
+            <a href="{{ route('excel.print', ['filter' => request('filter')]) }}" class="btn btn-info">
+                Export Penjualan (.xlsx)
+            </a>
         </div>
     </div>
+
+    
 
     {{-- Tombol Tambah Penjualan untuk Petugas --}}
     @if (Auth::user()->role == 'petugas')
@@ -23,6 +25,25 @@
     </div>
     @endif
 
+    <form method="GET" action="{{ route('transactions.index') }}" class="mb-3">
+        <div class="row g-2 align-items-center">
+            <div class="col-auto">
+                <label for="filter" class="col-form-label">Filter:</label>
+            </div>
+            <div class="col-auto">
+                <select name="filter" id="filter" class="form-select">
+                    <option value="">-- Semua --</option>
+                    <option value="harian" {{ request('filter') == 'harian' ? 'selected' : '' }}>Harian</option>
+                    <option value="mingguan" {{ request('filter') == 'mingguan' ? 'selected' : '' }}>Mingguan</option>
+                    <option value="bulanan" {{ request('filter') == 'bulanan' ? 'selected' : '' }}>Bulanan</option>
+                </select>
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-secondary">Terapkan</button>
+            </div>
+        </div>
+    </form>
+    
     {{-- Table Wrapper --}}
     <div id="salesTable_wrapper" class="dataTables_wrapper no-footer">
         <div class="d-flex justify-content-between mb-3">
@@ -38,6 +59,7 @@
                     entri
                 </label>
             </div>
+            
 
             {{-- Pencarian (opsional, bisa diaktifkan kembali) --}}
             {{--
@@ -62,7 +84,7 @@
                     <th>Action</th>
                 </tr>
             </thead>
-            {{-- <tbody>
+            <tbody>
                 @forelse ($transactions as $transaction)
                 <tr>
                     <td>{{ $loop->iteration }}</td>
@@ -86,7 +108,7 @@
                     <td colspan="6" class="text-center">Tidak ada data penjualan.</td>
                 </tr>
                 @endforelse
-            </tbody> --}}
+            </tbody>
         </table>
     </div>
 </div>

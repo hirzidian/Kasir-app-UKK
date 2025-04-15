@@ -59,10 +59,10 @@
     <div class="container">
         <div class="card">
             <div class="card-header">Detail Transaksi</div>
-            <p><b>Member Status:</b> Member</p>
-            <p><b>No. HP:</b> 081234567890</p>
-            <p><b>Bergabung Sejak:</b> 14-04-2025</p>
-            <p><b>Poin Member:</b> 1200</p>
+            <p><b>Member Status:</b> {{ $transaction->customer ? 'Member' : 'NON-MEMBER' }}</p>
+            <p><b>No. HP:</b> {{ $transaction->customer ? $transaction->customer->no_hp : '-' }}</p>
+            <p><b>Bergabung Sejak:</b> {{ $transaction->customer ? dateDmy($transaction->created_at) : '-' }}</p>
+            <p><b>Poin Member:</b> {{ $transaction->customer ? $transaction->customer->total_point : '-' }}</p>
         </div>
 
         <div class="card">
@@ -72,45 +72,35 @@
                         <th>Product</th>
                         <th>Quantity</th>
                         <th>Price</th>
-                        <th>Sub total</th>
+                        <th>Sub Total</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Produk A</td>
-                        <td>2</td>
-                        <td>Rp10.000</td>
-                        <td>Rp20.000</td>
-                    </tr>
-                    <tr>
-                        <td>Produk B</td>
-                        <td>1</td>
-                        <td>Rp15.000</td>
-                        <td>Rp15.000</td>
-                    </tr>
-                    <tr>
-                        <td>Produk C</td>
-                        <td>3</td>
-                        <td>Rp5.000</td>
-                        <td>Rp15.000</td>
-                    </tr>
+                    @foreach ($transaction_details as $item)
+                        <tr>
+                            <td>{{ $item->product->name }}</td>
+                            <td>{{ $item->quantity }}</td>
+                            <td class="text-right">{{ formattedPrice($item->product->price) }}</td>
+                            <td class="text-right">{{ formattedPrice($item->sub_total) }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="2"></td>
                         <td class="text-right"><b>Total Harga</b></td>
-                        <td><b>Rp50.000</b></td>
+                        <td class="text-right"><b>{{ formattedPrice($transaction->total_price) }}</b></td>
                     </tr>
                     <tr>
-                        <td><b>Poin Digunakan</b></td>
-                        <td class="text-right"><b>Rp5.000</b></td>
+                        <td colspan=""><b>Poin Digunakan</b></td>
+                        <td class="text-right"><b>{{ formattedPrice($transaction->used_point ? $transaction->used_point : 0) }}</b></td>
                         <td class="text-right"><b>Harga Setelah Poin</b></td>
-                        <td><b>Rp45.000</b></td>
+                        <td class="text-right"><b>{{ formattedPrice($transaction->total_price - $transaction->used_point) }}</b></td>
                     </tr>
                     <tr>
                         <td colspan="2"></td>
                         <td class="text-right"><b>Total Kembalian</b></td>
-                        <td><b>Rp10.000</b></td>
+                        <td class="text-right"><b>{{ formattedPrice($transaction->total_return) }}</b></td>
                     </tr>
                 </tfoot>
             </table>
@@ -119,3 +109,5 @@
 </body>
 
 </html>
+
+buat laporan harian bulanan tahunan 

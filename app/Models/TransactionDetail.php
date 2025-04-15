@@ -24,4 +24,3 @@ class TransactionDetail extends Model
         return $this->belongsTo(transaction::class,'');
     }
 }
-

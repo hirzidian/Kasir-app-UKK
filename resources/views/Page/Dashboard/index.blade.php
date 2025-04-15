@@ -7,9 +7,9 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    {{-- @if (Auth::user()->role == 'Petugas') --}}
+                    @if (Auth::user()->role == 'petugas')
                         <h3>Selamat Datang, 
-                            {{-- {{ Auth::user()->name }} --}}
+                            {{ Auth::user()->name }}
                         </h3>
                         <div class="card d-block m-auto text-center">
                             <div class="card-header">
@@ -17,16 +17,16 @@
                             </div>
                             <div class="card-body">
                                 <h3 class="card-title">
-                                    {{-- {{ $count }} --}}
+                                    {{ $count }}
                                 </h3>
                                 <p class="card-text">Jumlah total penjualan yang terjadi hari ini.</p>
                             </div>
                             <div class="card-footer text-muted">
                                 Terakhir diperbarui: 
-                                {{-- {{ $date }} --}}
+                                {{ $date }}
                             </div>
                         </div>
-                    {{-- @else --}}
+                    @else
                         <div class="card-body">
                             <h3>Selamat Datang, Administrator!</h3>
                             <div class="row">
@@ -38,14 +38,14 @@
                                 </div>
                             </div>
                         </div>
-                    {{-- @endif --}}
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 @endsection
 
-{{-- @section('script')
+@section('script')
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -135,4 +135,4 @@
             }
         });
     </script>
-@endsection --}}
+@endsection

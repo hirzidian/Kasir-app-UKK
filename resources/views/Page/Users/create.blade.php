@@ -1,5 +1,5 @@
 @extends('noSidebar')
-@section('title', 'Create User')
+@section('title', 'Buat User')
 @section('content')
 
 <div class="card-body">

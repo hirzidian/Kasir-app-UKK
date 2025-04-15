@@ -7,9 +7,9 @@
     <div class="card">
         <div class="table-responsive">
             <div class="card-header d-flex justify-content-between align-items-center">
-                {{-- @if (Auth::user()->role == 'admin') --}}
+                @if (Auth::user()->role == 'admin')
                     <a href="{{ route('products.create') }}" class="btn btn-info">Buat Product</a>
-                {{-- @endif --}}
+                @endif
             {{-- Search --}}
                 <form action=
                 "{{ route('products.index') }}"
@@ -33,9 +33,9 @@
                         <th scope="col">Name</th>
                         <th scope="col">Price</th>
                         <th scope="col">Stock</th>
-                        {{-- @if (Auth::user()->role == 'admin') --}}
+                        @if (Auth::user()->role == 'admin')
                         <th scope="col">Action</th>
-                        {{-- @endif --}}
+                        @endif
                     </tr>
                 </thead>
                 {{-- Memanggil data yang ada di data base --}}
@@ -47,7 +47,7 @@
                         <td>{{ $product->name }}</td>
                         <td>{{ number_format($product['price'], 0, ',', '.') }}</td>
                         <td>{{ $product->stock }}</td>
-                        {{-- @if (Auth::user()->role == 'admin')     --}}
+                        @if (Auth::user()->role == 'admin')    
                         <td>
                             <div class="d-flex justify-content-around">
                                 <a 
@@ -62,7 +62,7 @@
                             </form>
                             </div>
                         </td>
-                        {{-- @endif --}}
+                        @endif
                     </tr>
                     @endforeach
                 </tbody>

@@ -38,7 +38,7 @@
     @endforeach
 
     <form action=
-    {{-- "{{ route('transaction.store') }}" --}}
+    "{{ route('transactions.store') }}"
      method="POST">
         @csrf
         <div class="row fixed-bottom d-flex justify-content-end align-content-center"

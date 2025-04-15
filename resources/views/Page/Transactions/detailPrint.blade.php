@@ -1,6 +1,6 @@
 @extends('template')
 
-@section('title', 'Penjualan')
+@section('title', 'Stuck')
 @section('style')
     <style>
         .invoice-price {
@@ -69,8 +69,8 @@
                                 <div class="row gutters">
                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
                                         <div class="custom-actions-btns mb-5">
-                                            {{-- <a href="{{ route('pdf.print', $transaction->id) }}" class="btn btn-primary">Unduh (.pdf)</a> --}}
-                                            <a href="{{ route('transacations.index') }}"
+                                            <a href="{{ route('pdf.print', $transaction->id) }}" class="btn btn-primary">Unduh (.pdf)</a>
+                                            <a href="{{ route('transactions.index') }}"
                                                 class="btn btn-secondary">
                                                 <i class="mdi mdi-arrow-left"></i> Kembali
                                             </a>
